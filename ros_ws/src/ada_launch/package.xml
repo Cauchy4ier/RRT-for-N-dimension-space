@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ada_launch</name>
+  <version>0.1.0</version>
+  <description>
+    Launch files for ADA, a single arm mobile manipulator
+    built by the Personal Robotics Lab at University of Washington.
+  </description>
+  <maintainer email="yskim041@gmail.com">Youngsun Kim</maintainer>
+
+  <license>BSD</license>
+  <url type="website">https://personalrobotics.cs.washington.edu</url>
+  <url type="bugtracker"></url>
+  <url type="repository"></url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>joint_state_publisher</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>xacro</depend>
+  <depend>ada_description</depend>
+  <depend>urdf</depend>
+  <depend>geometry_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>tf2_ros</depend>
+
+</package>
+

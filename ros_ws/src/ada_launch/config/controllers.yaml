@@ -1,0 +1,166 @@
+soft_limits:
+  eff: [16,16,16,10,10,10,1.3,1.3]
+
+#for the joint limit controller
+joint_limits:
+    j2n6s200_joint_1:
+        has_velocity_limits: true
+        max_velocity: 2.0
+    j2n6s200_joint_2:
+        has_velocity_limits: true
+        max_velocity: 2.0
+    j2n6s200_joint_3:
+        has_velocity_limits: true
+        max_velocity: 2.0
+    j2n6s200_joint_4:
+        has_velocity_limits: true
+        max_velocity: 2.0
+    j2n6s200_joint_5:
+        has_velocity_limits: true
+        max_velocity: 2.0
+    j2n6s200_joint_6:
+        has_velocity_limits: true
+        max_velocity: 2.0
+
+
+# whole-arm joint_state publisher
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+  #arm_force_controller:
+trajectory_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints: [j2n6s200_joint_1, j2n6s200_joint_2, j2n6s200_joint_3,
+    j2n6s200_joint_4, j2n6s200_joint_5, j2n6s200_joint_6]
+  constraints:
+    stopped_velocity_tolerance: 1.0
+    j2n6s200_joint_1:
+      goal: 0.02
+    j2n6s200_joint_2:
+      goal: 0.02
+    j2n6s200_joint_3:
+      goal: 0.02
+    j2n6s200_joint_4:
+      goal: 0.02
+    j2n6s200_joint_5:
+      goal: 0.02
+    j2n6s200_joint_6:
+      goal: 0.02
+  gains: # Required because we're controlling a velocity interface
+    j2n6s200_joint_1: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_2: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_3: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_4: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_5: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_6: {p: 3,  d: 0, i: 0, i_clamp: 1}
+
+# Optional controller that might be useful for testing.
+# Should do the same thing as trajectory_controller, but this is 
+# the lab's rewd_controllers implementation
+rewd_trajectory_controller:
+  type: rewd_controllers/JointTrajectoryController
+  joints: [j2n6s200_joint_1, j2n6s200_joint_2, j2n6s200_joint_3,
+    j2n6s200_joint_4, j2n6s200_joint_5, j2n6s200_joint_6]
+  constraints:
+    stopped_velocity_tolerance: 1.0
+    j2n6s200_joint_1:
+      goal: 0.02
+    j2n6s200_joint_2:
+      goal: 0.02
+    j2n6s200_joint_3:
+      goal: 0.02
+    j2n6s200_joint_4:
+      goal: 0.02
+    j2n6s200_joint_5:
+      goal: 0.02
+    j2n6s200_joint_6:
+      goal: 0.02
+  gains: # Required because we're controlling a velocity interface
+    j2n6s200_joint_1: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_2: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_3: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_4: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_5: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_6: {p: 3,  d: 0, i: 0, i_clamp: 1}
+  control_type: velocity
+
+j2n6s200_hand_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints: [j2n6s200_joint_finger_1, j2n6s200_joint_finger_2]
+  constraints:
+    stopped_velocity_tolerance: 1.0
+  gains: # Required because we're controlling a velocity interface
+    j2n6s200_joint_finger_1: {p: 1,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_finger_2: {p: 1,  d: 0, i: 0, i_clamp: 1}
+
+move_until_touch_topic_controller:
+  type: rewd_controllers/MoveUntilTouchTopicController
+  # Forque Sensor
+  forcetorque_wrench_name: /forque/forqueSensor
+  forcetorque_tare_name: /forque/bias_controller/trigger
+  # FingerVision
+  # forcetorque_wrench_name: /fingervision/fv_3_l/wrench
+  # forcetorque_tare_name: /fingervision/fingerVisionTaring
+  sensor_force_limit: 50
+  sensor_torque_limit: 5
+  joints: [j2n6s200_joint_1, j2n6s200_joint_2, j2n6s200_joint_3,
+    j2n6s200_joint_4, j2n6s200_joint_5, j2n6s200_joint_6]
+  control_type: velocity
+  constraints:
+    j2n6s200_joint_1:
+      goal: 0.02
+    j2n6s200_joint_2:
+      goal: 0.02
+    j2n6s200_joint_3:
+      goal: 0.02
+    j2n6s200_joint_4:
+      goal: 0.02
+    j2n6s200_joint_5:
+      goal: 0.02
+    j2n6s200_joint_6:
+      goal: 0.02
+  gains: # Required because we're controlling a velocity interface
+    j2n6s200_joint_1: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_2: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_3: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_4: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_5: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_6: {p: 3,  d: 0, i: 0, i_clamp: 1}
+
+# In the future, this can listen to whatever topic needed to detect touch
+# for the robot hairbrush...
+arm_force_topic_controller:
+  type: rewd_controllers/ArmForceTopicController
+  # Forque Sensor
+  topic_name: /joint_states
+  joint_1_threshold: 1.8
+  joint_2_threshold: 50
+  joint_3_threshold: 50
+  joint_4_threshold: 50
+  joint_5_threshold: 50
+  joint_6_threshold: 50
+  joints: [j2n6s200_joint_1, j2n6s200_joint_2, j2n6s200_joint_3,
+    j2n6s200_joint_4, j2n6s200_joint_5, j2n6s200_joint_6]
+  control_type: velocity
+  constraints:
+    stopped_velocity_tolerance: 1.0
+    j2n6s200_joint_1:
+      goal: 0.02
+    j2n6s200_joint_2:
+      goal: 0.02
+    j2n6s200_joint_3:
+      goal: 0.02
+    j2n6s200_joint_4:
+      goal: 0.02
+    j2n6s200_joint_5:
+      goal: 0.02
+    j2n6s200_joint_6:
+      goal: 0.02
+  gains: # Required because we're controlling a velocity interface
+    j2n6s200_joint_1: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_2: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_3: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_4: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_5: {p: 3,  d: 0, i: 0, i_clamp: 1}
+    j2n6s200_joint_6: {p: 3,  d: 0, i: 0, i_clamp: 1}
