@@ -15,7 +15,7 @@ Use roscore command and open a new terminal,initiate rviz.
 `source devel/setup.bash`  
 `rviz`  
 Open another new terminal, run the RRT python code. `python src/adarrt/src/adarrt.py`  
-You will see the path coordinates shown on the terminal. If it's your first time running the code, there would nothing shown in rviz. To solve this, find "Add" button on left bottom of rviz. In "by topic" tab, you can see "/dark_markers/simple_trajectories/update/InteractiveMarkers". Add it without hesitation. You can see the Ada arm and the enviroment with a table, a can and two bowls.  
+You will see the path coordinates shown on the terminal. If it's your first time running the code, there would nothing shown in rviz. To solve this, find "Add" button on left bottom of rviz. In "by topic" tag, you can see "/dark_markers/simple_trajectories/update/InteractiveMarkers". Add it without hesitation. You can see the Ada arm and the enviroment with a table, a can and two bowls.  
 After iterations, follow the instruction appeared on the terminal. Press "Enter" to execute the trajectory, you would see the arm reaches the can and avoids from collision with the bowls and table.  
 ![](https://github.com/Cauchy4ier/RRT-for-N-dimension-space/blob/main/Screenshot%20from%202020-11-10%2003-01-54.png)
 
